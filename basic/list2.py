@@ -26,7 +26,37 @@ def remove_adjacent(nums):
 # pass of both lists.
 def linear_merge(list1, list2):
   # +++your code here+++
-  return sorted(list1 + list2)
+  
+  result = []
+  # Look at the two lists so long as both are non-empty.
+  # Take whichever element [0] is smaller.
+  while len(list1) and len(list2):
+    if list1[0] < list2[0]:
+      result.append(list1.pop(0))
+    else:
+      result.append(list2.pop(0))
+
+  # Now tack on what's left
+  result.extend(list1)
+  result.extend(list2)
+  return result
+
+
+  """
+  newlist = []
+  print list1
+  print list2
+  while len(list1) and len(list2):
+    if list1[0] < list2[0]:
+      newlist.append(list1.pop())
+    else:
+      newlist.append(list2.pop())
+  
+  newlist.extend(list1)
+  newlist.extend(list2)
+  print newlist
+  """
+  #return sorted(list1 + list2)
 
 # Note: the solution above is kind of cute, but unforunately list.pop(0)
 # is not constant time with the standard python list implementation, so

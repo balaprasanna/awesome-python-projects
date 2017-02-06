@@ -45,6 +45,35 @@ import sys
 # and builds and returns a word/count dict for it.
 # Then print_words() and print_top() can just call the utility function.
 
+def sortbycount(tuples):
+  return tuples[1]
+
+def dict_helper(filename, isRev):
+  mydict = {}
+  f = open(filename)
+  for line in f:
+    words = line.split()
+    for word in words:
+      lw = word.lower()
+      if mydict.has_key(lw):
+        mydict[lw] = mydict.get(lw) + 1
+      else:
+        mydict[lw] = 1
+  if isRev:
+    return sorted(mydict.items(), key=sortbycount, reverse=True)
+  else: 
+    return sorted(mydict.items(), key=sortbycount)
+
+def print_words(filename):
+  wordlist = dict_helper(filename, False)
+  for wordcount in wordlist:
+    print wordcount[0], wordcount[1]
+
+def print_top(filename):
+  wordlist = dict_helper(filename, True)
+  for wordcount in wordlist[:21]:
+    print wordcount[0], wordcount[1]
+
 ###
 
 # This basic command line argument parsing code is provided and
