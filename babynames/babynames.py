@@ -40,7 +40,16 @@ def extract_names(filename):
   followed by the name-rank strings in alphabetical order.
   ['2006', 'Aaliyah 91', Aaron 57', 'Abagail 895', ' ...]
   """
+  def find(regexp, data):
+    m = re.search(regexp,data) 
+    return m.group()
+    
   # +++your code here+++
+  f =  open(filename,  'r')
+  contents = f.read()
+  f.close()
+  result = find(r'in\s\d{4}', contents) 
+  print result.split()[1]
   return
 
 
@@ -63,6 +72,9 @@ def main():
   # +++your code here+++
   # For each filename, get the names, then either print the text output
   # or write it to a summary file
+  for filename in args:
+    extract_names(filename)
+
   
 if __name__ == '__main__':
   main()
